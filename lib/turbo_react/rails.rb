@@ -1,4 +1,4 @@
-require "turbo-react/rails/version"
+require "turbo_react/rails/version"
 
 module TurboReact
   module Rails
