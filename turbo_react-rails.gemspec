@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ross Allen"]
   spec.email         = ["rossgit@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "TurboReact for the Rails 3.1+ Asset Pipeline"
   spec.homepage      = "https://github.com/ssorallen/turbo_react-rails"
   spec.license       = "MIT"
 
@@ -18,6 +17,9 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.cert_chain    = ["certs/ssorallen.pem"]
+  spec.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $0 =~ /gem\z/
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"

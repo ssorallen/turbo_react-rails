@@ -1,1 +1,4 @@
 Gemfile.lock
+
+# Ignore built Gem in the project directory
+*.gem
