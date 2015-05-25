@@ -3,26 +3,27 @@
 `TurboReact::Rails` is a Ruby on Rails engine for including
 [TurboReact](https://github.com/ssorallen/turbo-react) in a Rails application.
 
-## Installation
+## Installation & Usage
 
-Add this line to your application's Gemfile:
+1. Add this line to your application's Gemfile:
 
-```ruby
-gem 'turbo_react-rails'
-```
+    ```ruby
+    gem 'turbo_react-rails'
+    ```
 
-And then execute:
+2. Install the updated gems
 
-    $ bundle
+    ```sh
+    $ bundle install
+    ```
 
-## Usage
+3. Require `turbo-react` in a JavaScript file like "application.js" after
+   [Turbolinks](https://github.com/rails/turbolinks):
 
-Require `turbo_react` in a JavaScript file like "application.js" after Turbolinks:
-
-```js
-//= require turbolinks
-//= require turbo_react
-```
+    ```js
+    //= require turbolinks
+    //= require turbo-react
+    ```
 
 ## Development
 
