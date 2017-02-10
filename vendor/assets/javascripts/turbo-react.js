@@ -1,18 +1,19 @@
 "use strict";
 
-if (global.Turbolinks === undefined) {
+if (window.Turbolinks === undefined) {
   throw "Missing Turbolinks dependency. TurboReact requires Turbolinks be included before it.";
 }
 
 var HTMLtoJSX = require("htmltojsx");
 var JSXTransformer = require("react-tools");
 var React = require("react");
+var ReactDOM = require("react-dom");
 
 // Disable the Turbolinks page cache to prevent Tlinks from storing versions of
 // pages with `react-id` attributes in them. When popping off the history, the
 // `react-id` attributes cause React to treat the old page like a pre-rendered
 // page and breaks diffing.
-global.Turbolinks.pagesCached(0);
+Turbolinks.controller.cache.size = 0;
 
 // `documentElement.replaceChild` must be called in the context of the
 // `documentElement`. Keep a bound reference to use later.
@@ -28,7 +29,7 @@ var TurboReact = {
   applyDiff: function(replacementElement, targetElement) {
     try {
       var bod = TurboReact.reactize(replacementElement);
-      React.render(bod, targetElement);
+      ReactDOM.render(bod, targetElement);
     } catch(e) {
       // If any problem occurs when updating content, let Turbolinks replace
       // the page normally. That means no transitions, but it also means no
@@ -41,6 +42,11 @@ var TurboReact = {
     var code = JSXTransformer.transform(converter.convert(element.innerHTML));
     return eval(code);
   }
+};
+
+Turbolinks.SnapshotRenderer.prototype.assignNewBody = function() {
+  TurboReact.applyDiff(this.newBody, document.body);
+  return this.newBody;
 };
 
 // Turbolinks calls `replaceChild` on the document element when an update should
